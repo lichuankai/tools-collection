@@ -1,7 +1,7 @@
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  title: 'Site Name',
+  title: 'star组件库',
   mode: 'site',
   navs: [
     {
@@ -20,7 +20,7 @@ export default defineConfig({
   menus: {
       '/guide': [
         {
-          title: '菜单项',
+          title: '快速上手',
           children: [
             'guide/index.md',
             'guide/sample.md',
@@ -32,7 +32,6 @@ export default defineConfig({
         {
           title: '基础组件',
           children: [
-            'src/index.md',
             'src/button.md'
           ]
         }
