@@ -1,2 +1,2 @@
-import 'antd/dist/antd.less';
+import './index.less';
 export * from './components';

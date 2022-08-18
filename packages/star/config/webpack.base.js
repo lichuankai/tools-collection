@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const entryies = require('./entry');
 const { ProgressPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: entryies,
@@ -14,7 +15,13 @@ module.exports = {
     library: '[name]',
     libraryTarget: 'umd'
   },
-  mode: 'production',
+  mode: 'development',
+  devtool: 'source-map',
+  externals: {
+    'antd': 'antd',
+    'react': 'react',
+    'react-dom': 'react-dom'
+  },
   resolve: {
     alias: {
       '@src': path.resolve(__dirname, '../src')
@@ -38,7 +45,7 @@ module.exports = {
         test: /\.(tsx|ts)?$/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: 'babel-loader?cacheDirectory',
           },
           {
             loader: 'ts-loader',
@@ -48,7 +55,7 @@ module.exports = {
       },
       {
         test: /\.(jsx|js)?$/,
-        use: 'babel-loader',
+        use: 'babel-loader?cacheDirectory',
         exclude: /node_modules/
       },
       {
@@ -62,8 +69,9 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: true,
-              javascriptEnabled: true
+              lessOptions: {
+                javascriptEnabled: true
+              }
             }
           }
         ],
@@ -96,6 +104,7 @@ module.exports = {
       // handler(percentage, message, ...args) {
       //   console.log("进度：" + percentage * 100 + '%' + " " + "操作：" + message)
       // }
-    })
+    }),
+    // new BundleAnalyzerPlugin(),
   ]
 }
